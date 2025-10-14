@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+	<head>
+		<title>Joint Simulation</title>
+		<style>
+			body {
+				font-family: verdana; 
+				font-size: 15px;
+			}			
+			.button {
+                background-color: #606060;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+		    }
+            .styled-select {
+                appearance: none;
+                background-color: #606060;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            /* Custom checkbox styling */
+            .visual-toggle {
+                display: none;
+            }
+            .visual-toggle-label {
+                background-color: #606060;
+                color: white;
+                padding: 15px 32px;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                display: inline-block;
+                user-select: none;
+                transition: background-color 0.3s;
+            }
+            .visual-toggle-label:hover {
+                background-color: #707070;
+            }
+            .visual-toggle:checked + .visual-toggle-label {
+                background-color: #606060;
+            }
+            /* Touch control styling */
+            #touchControl {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 150px;
+                height: 150px;
+                pointer-events: none;
+            }
+            #outerCircle {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 0%;
+                background-color: rgba(96, 96, 96, 0.5);
+                pointer-events: auto;
+            }
+            #innerCircle {
+                position: absolute;
+                width: 40%;
+                height: 40%;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.8);
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+            }
+		</style>	
+	</head>
+	
+	<body>
+
+        <h1>Joint Simulation</h1> 
+		<button id = "startButton" onclick="onStart()" class="button">Start</button>
+		<button id = "startRestart" onclick="onRestart()" class="button">Restart</button>
+		<button id = "toggleView" onclick="onToggleView()" class="button">Toggle View</button>
+		<select id="sceneSelect" class="styled-select" onchange="onSceneChange()">
+			<option value="0">Basic Joints</option>
+			<option value="1">Steering</option>
+			<option value="2">Pendulums</option>
+		</select>
+
+		<br><br>		
+        <div id="container"></div>
+        <div id="touchControl">
+            <div id="outerCircle"></div>
+            <div id="innerCircle"></div>
+        </div>
+        
+        <script src="https://unpkg.com/three@0.139.2/build/three.min.js"></script>
+        <script src="https://unpkg.com/three@0.139.2/examples/js/controls/OrbitControls.js"></script>
+
+    <script type="joint_simulator/main.js"> </script>
+
+    </body>
+</html>
+
+
+
