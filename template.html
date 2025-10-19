@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+    <head>
+        <title> TEMPLATE </title>
+    </head>
+
+    <!------- Styling -------->
+    <style>
+        body {
+            font-family: verdana; 
+            font-size: 15px;
+        }			
+        .button {
+            background-color: #606060;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .styled-select {
+            appearance: none;
+            background-color: #606060;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #mainCanvas {
+            border: 2px solid;
+        }
+    </style>
+
+    <body>
+
+        <!-- Canvas -->
+        <button class="button" onclick="setupScene()">Restart</button>
+        <canvas id="mainCanvas"> </canvas>
+
+        <!-- Main Script -->
+        <script>
+            class Object {
+                constructor(pos, vel = {x: 0, y: 0}, mass) {
+                    this.pos = pos;
+                    this.vel = vel;
+                }
+
+                update(a) {
+                    // Updates the position and speed
+                    this.vel.x = this.vel.x + a.x * sub_dt
+                    this.pos.x = this.pos.x + this.vel.x * sub_dt
+
+                    this.vel.y = this.vel.y + a.y * sub_dt
+                    this.pos.y = this.pos.y + this.vel.y * sub_dt
+
+                    collisionCheck()
+                }
+                
+                collisionCheck() {
+                    // Checks for collisions
+                    //for (var i = 0; i < OBJECTS.length; i++) {
+                    //    if (this.overlaps(OBJECTS[i])) {} }
+                    if (this.pos.x < 0.0) {
+                        this.pos.x = 0.0;
+                        this.vel.x = -0.95 * this.vel.x;
+                    }
+                    if (this.pos.x > simWidth) {
+                        this.pos.x = simWidth;
+                        this.vel.x = -0.95 * this.vel.x;
+                    }
+                    if (this.pos.y < 0.0) {
+                        this.pos.y = 0.0;
+                        this.vel.y = -0.95 * this.vel.y;
+                    }
+                    if (this.pos.y < simHeight) {
+                        this.pos.y = simHeight;
+                        this.vel.y = -0.95 * this.vel.y;
+                    }
+                }
+
+                overlaps(other) {
+                    if (this.pos.x - other.pos.x < this.x) {
+                        
+                    }
+                }
+
+                draw() {
+                    // Draw the object
+
+                }
+            }
+
+            class Ball extends Object {
+                constructor(pos, vel, mass, radius) {
+                    super(pos, vel, mass);
+                    this.radius = radius;
+                }
+            }
+
+            // Setup
+            var canvas = document.getElementById("mainCanvas");
+            var c = canvas.getContext("2d");
+
+            var physicsScene = {
+                OBJECTS : [],
+                paused : true,
+                dt : 0.01,
+                Nr_substeps : 10,
+                sub_dt : dt / Nr_substeps,
+                g : -9.82
+            }
+            
+            canvas.width = window.innerWidth -20;
+            canvas.width = window.innerWidth -20;
+
+            var simMinWidth = 20;
+            var cScale = Math.min(canvas.width, canvas.height) / simMinWidth;   // cScale is the ratio between the smallest canvas dimension and our minimum simulation size
+            var simWidth = canvas.width / cScale;
+            var simHeight = canvas.height / cScale;
+
+            function setupScene() {
+                for (i=0; i < Nr_balls; i++) {
+                    position = Math.random()
+                    physicsScene.OBJECTS.push(new Ball())
+                }
+            }
+
+            function cX(pos) { return pos.x * cScale }
+
+            function cX(pos) { return canvas.height - pos.y * cScale }
+
+            function draw() {
+                c.clearRect(0,0,canvas.width, canvas.height)
+
+            };
+
+            function simulate() {
+                var run = true;
+                while (run) {
+                    for (n=0; n < Nr_substeps; n++) {
+                    }
+
+                    draw();
+                }  
+            };
+
+            function update() {
+                simulate();
+                draw();
+                requestAnimationFrame(update);
+            };
+
+            update()
+
+        </script>
+
+    </body>
+
+
+</html>
